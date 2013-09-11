@@ -1,4 +1,6 @@
-cpputest-starter-project
-========================
+cpputest-starter-project-vs
+===========================
 
-gcc cpputest starter project, with instructions to help get your legacy code into cpputest for the first time
+A cpputest starter project 
+
+see the readme directory

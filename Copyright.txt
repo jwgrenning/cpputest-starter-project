@@ -1,0 +1,8 @@
+Copyright (c) Renaissance Software Consulting, Co.
+
+All materials in this exercise bundle are authorized for use by attendees
+of Renaissance Software Consulting TDD for Embedded C training course.
+
+For information please contact:
+
+james@renaissancesoftware.net
