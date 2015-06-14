@@ -1,0 +1,15 @@
+Linking HomeAutomation_tests
+objs/LightSchedulerTest.o: In function `TEST_LightScheduler_CreateDoesNotChangeTheLights_Test::testBody()':
+/sandbox/LightSchedulerTest.cpp:31: undefined reference to `LightControllerSpy_GetLastId'
+/sandbox/LightSchedulerTest.cpp:32: undefined reference to `LightControllerSpy_GetLastState'
+objs/LightSchedulerTest.o: In function `TEST_LightScheduler_NoScheduleNothingHappens_Test::testBody()':
+/sandbox/LightSchedulerTest.cpp:38: undefined reference to `LightControllerSpy_GetLastId'
+/sandbox/LightSchedulerTest.cpp:39: undefined reference to `LightControllerSpy_GetLastState'
+objs/LightSchedulerTest.o: In function `TEST_LightScheduler_ScheduleOnEverydayNotTime_Test::testBody()':
+/sandbox/LightSchedulerTest.cpp:48: undefined reference to `LightControllerSpy_GetLastId'
+/sandbox/LightSchedulerTest.cpp:49: undefined reference to `LightControllerSpy_GetLastState'
+objs/LightSchedulerTest.o: In function `TEST_LightScheduler_ScheduleOnEverydayTurnsOnAtRigthTime_Test::testBody()':
+/sandbox/LightSchedulerTest.cpp:58: undefined reference to `LightControllerSpy_GetLastId'
+/sandbox/LightSchedulerTest.cpp:59: undefined reference to `LightControllerSpy_GetLastState'
+objs/LightSchedulerTest.o: In function `TEST_GROUP_CppUTestGroupLightScheduler::setup()':
+/sandbox/LightSchedulerTest.cpp:19: undefined reference to `LightController_Create'
