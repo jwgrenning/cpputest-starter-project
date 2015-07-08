@@ -1,15 +1,15 @@
 Linking HomeAutomation_tests
-objs/LightSchedulerTest.o: In function `TEST_LightScheduler_CreateDoesNotChangeTheLights_Test::testBody()':
-/sandbox/LightSchedulerTest.cpp:31: undefined reference to `LightControllerSpy_GetLastId'
-/sandbox/LightSchedulerTest.cpp:32: undefined reference to `LightControllerSpy_GetLastState'
-objs/LightSchedulerTest.o: In function `TEST_LightScheduler_NoScheduleNothingHappens_Test::testBody()':
-/sandbox/LightSchedulerTest.cpp:38: undefined reference to `LightControllerSpy_GetLastId'
-/sandbox/LightSchedulerTest.cpp:39: undefined reference to `LightControllerSpy_GetLastState'
-objs/LightSchedulerTest.o: In function `TEST_LightScheduler_ScheduleOnEverydayNotTime_Test::testBody()':
-/sandbox/LightSchedulerTest.cpp:48: undefined reference to `LightControllerSpy_GetLastId'
-/sandbox/LightSchedulerTest.cpp:49: undefined reference to `LightControllerSpy_GetLastState'
-objs/LightSchedulerTest.o: In function `TEST_LightScheduler_ScheduleOnEverydayTurnsOnAtRigthTime_Test::testBody()':
-/sandbox/LightSchedulerTest.cpp:58: undefined reference to `LightControllerSpy_GetLastId'
-/sandbox/LightSchedulerTest.cpp:59: undefined reference to `LightControllerSpy_GetLastState'
-objs/LightSchedulerTest.o: In function `TEST_GROUP_CppUTestGroupLightScheduler::setup()':
-/sandbox/LightSchedulerTest.cpp:19: undefined reference to `LightController_Create'
+objs/LightScheduler.o: In function `LightScheduler_AddTurnOn':
+/sandbox/LightScheduler.c:86: undefined reference to `LightController_On'
+objs/LightScheduler.o: In function `LightScheduler_AddTurnOff':
+/sandbox/LightScheduler.c:91: undefined reference to `LightController_Off'
+lib/libHomeAutomation.a(Scheduler.o): In function `Scheduler_Create':
+/sandbox/Scheduler.c:37: undefined reference to `TimeService_SchedulePeriodicAlarm'
+lib/libHomeAutomation.a(Scheduler.o): In function `Scheduler_Destroy':
+/sandbox/Scheduler.c:53: undefined reference to `TimeService_CancelPeriodicAlarm'
+lib/libHomeAutomation.a(Scheduler.o): In function `processReadyEvents':
+/sandbox/Scheduler.c:70: undefined reference to `TimeService_DaysMatch'
+lib/libHomeAutomation.a(Scheduler.o): In function `Scheduler_Wakeup':
+/sandbox/Scheduler.c:79: undefined reference to `TimeService_GetDay'
+/sandbox/Scheduler.c:80: undefined reference to `TimeService_GetMinute'
+collect2: error: ld returned 1 exit status

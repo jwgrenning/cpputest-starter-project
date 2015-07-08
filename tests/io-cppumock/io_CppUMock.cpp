@@ -15,7 +15,7 @@ void IOWrite(IOAddress addr, IOData data)
 
 IOData IORead(IOAddress addr)
 {
-    return mock("IO")
+    return (IOData)mock("IO")
             .actualCall("IORead")
             .withParameter("addr", (int)addr)
             .returnValue().getIntValue();

@@ -1,6 +1,6 @@
 #include "io.h"
 
-IOData * ioBase = (IOData *)0xdeadbeef;
+static IOData * ioBase = (IOData *)0xdeadbeef;
 
 IOData IORead(IOAddress offset)
 {

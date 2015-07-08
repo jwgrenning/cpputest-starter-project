@@ -1,5 +1,5 @@
-{\rtf1\ansi\ansicpg1252\cocoartf1138\cocoasubrtf510
-{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\fmodern\fcharset0 CourierNewPSMT;}
+{\rtf1\ansi\ansicpg1252\cocoartf1265\cocoasubrtf210
+\cocoascreenfonts1{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\fmodern\fcharset0 CourierNewPSMT;}
 {\colortbl;\red255\green255\blue255;}
 {\*\listtable{\list\listtemplateid1\listhybrid{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{disc\}}{\leveltext\leveltemplateid1\'01\uc0\u8226 ;}{\levelnumbers;}\fi-360\li720\lin720 }{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{hyphen\}}{\leveltext\leveltemplateid2\'01\uc0\u8259 ;}{\levelnumbers;}\fi-360\li1440\lin1440 }{\listname ;}\listid1}
 {\list\listtemplateid2\listhybrid{\listlevel\levelnfc0\levelnfcn0\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{decimal\}.}{\leveltext\leveltemplateid101\'02\'00.;}{\levelnumbers\'01;}\fi-360\li720\lin720 }{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{hyphen\}}{\leveltext\leveltemplateid102\'01\uc0\u8259 ;}{\levelnumbers;}\fi-360\li1440\lin1440 }{\listname ;}\listid2}
@@ -15,9 +15,21 @@
 This paper describes how to integrate CppUTest based testing with your production code using the GCC toolchain environment.\
 \
 
-\b 1)  Install and build CppUTest
-\b0 \
+\b 1)  Install and build CppUTest\
+
+\b0 Download the latest from cpputest.org into some directory with no spaces in the path, like /somewhere/tools, then\
 \
+\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural
+
+\f1 \cf0 	cd /somewhere/tools\
+	./configure\
+	make check\
+	make tdd\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural
+
+\f0 \cf0 \
+You should see CppUTest\'92s tests run.  If you get errors, check the CppUTest documentation on how to build it and adapt.  You can let me know there is a need for a change in these directions.\
 \
 
 \b 2) Define CPPUTEST_HOME\
@@ -25,18 +37,28 @@ This paper describes how to integrate CppUTest based testing with your productio
 \b0 Point it to the root directory of CppUTest.  If you don't, the starter project makefile will not be able to find MakefileWorker.mk\
 
 \b \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural
+
+\f1\b0 \cf0 	export CPPUTEST_HOME=/somewhere/tools\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural
+
+\f0\b \cf0 \
+\
 3) Build the starter project\
 
 \b0 From a terminal window, change the directory to the root of the starter project. The same directory where this file was found. The make all.\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural
 
-\f1 	cd /some/path/to/cpputest-starter-project\
+\f1 \cf0 	cd /some/path/to/cpputest-starter-project\
 	make all\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural
 
-\f0 \
+\f0 \cf0 \
 You should see output like this:\
 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural
 
-\f1 compiling FooExampleFFFTests.cpp\
+\f1 \cf0 compiling FooExampleFFFTests.cpp\
 compiling FooExample.fff.c\
 compiling io_CppUMock.cpp\
 compiling io_CppUMockTest.cpp\
@@ -52,8 +74,9 @@ Linking example_tests\
 Running example_tests\
 ..............\
 OK (14 tests, 14 ran, 47 checks, 0 ignored, 0 filtered out, 0 ms)\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural
 
-\f0 \
+\f0 \cf0 \
 \
 
 \b 4) Copy starter test files to your production code repository\
@@ -70,13 +93,15 @@ Let's presume a directory structure like this:\
 Copy cpputest-starter-project  directories into your ProductRepository.  It works best if the makefile does not have to use ".." to get to your source files.  Using ".." for include files is no problem. \
 \
 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural
 
-\f1 	cd /some/path/to/cpputest-starter-project\
+\f1 \cf0 	cd /some/path/to/cpputest-starter-project\
 	./copy-to-product-repo.sh /some/other/path/to/ProductRepository\
 	cd /some/other/path/to/ProductRepository\
 \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural
 
-\f0\b 4) Build the initial tests in the product code repository\
+\f0\b \cf0 4) Build the initial tests in the product code repository\
 
 \b0 \
 \pard\tx560\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural
@@ -86,8 +111,9 @@ Copy cpputest-starter-project  directories into your ProductRepository.  It work
 
 \f1 \cf0 	cd /some/other/path/to/ProductRepository\
 	make\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural
 
-\f0 \
+\f0 \cf0 \
 You should get the same test build output as before.\
 \
 Things that can go wrong:\
@@ -125,11 +151,18 @@ Things that can go wrong:\
 \pard\tx220\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\li720\fi-720\pardirnatural
 \ls4\ilvl0\cf0 {\listtext	\'95	}You already have Eclipse .project and .cproject files from your silicon vendors custom Eclipse implementation\
 \pard\tx940\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\li1440\fi-1440\pardirnatural
-\ls4\ilvl1\cf0 {\listtext	\uc0\u8259 	}get some help from your coaches -- sorry.  For now just do command line test builds for now.\
+\ls4\ilvl1\cf0 {\listtext	\uc0\u8259 	}get some help from someone that has done this before, later.  For now just do command line test builds.\
 \pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural
 \cf0 \
 
-\b You are ready to add your first test.  Now go look at the part two of the instructions.  Keep working in small verifiable steps.\
+\b You are ready to add your first test.  Now go look at this page:\
+\pard\tx220\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\li720\fi-720\pardirnatural
+
+\b0 \cf0 	\'95	{\field{\*\fldinst{HYPERLINK "https://wingman-sw.com/articles/get-your-legacy-c-into-a-test-harness"}}{\fldrslt https://wingman-sw.com/articles/get-your-legacy-c-into-a-test-harness}}
+\b \
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural
+\cf0 \
+Keep working in small verifiable steps.\
 
 \b0 \
 \
