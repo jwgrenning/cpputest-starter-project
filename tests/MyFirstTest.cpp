@@ -21,7 +21,7 @@ TEST_GROUP(MyCode)
 TEST(MyCode, test1)
 {
     /*
-     * Instantiate you class, or call the function, you want to test
+     * Instantiate your class, or call the function, you want to test
      */
 }
 
