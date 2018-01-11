@@ -96,9 +96,14 @@ CPPUTEST_WARNINGFLAGS += -Wno-shadow
 CPPUTEST_WARNINGFLAGS += -Wno-missing-field-initializers
 CPPUTEST_WARNINGFLAGS += -Wno-unused-parameter
 CPPUTEST_CFLAGS += -Wall
-CPPUTEST_CFLAGS += -Wstrict-prototypes
 CPPUTEST_CFLAGS += -pedantic
 CPPUTEST_CFLAGS += -Wno-missing-prototypes
+CPPUTEST_CFLAGS += -Wno-strict-prototypes
+CPPUTEST_CXXFLAGS += -Wno-c++14-compat
+CPPUTEST_CXXFLAGS += --std=c++11
+CPPUTEST_CXXFLAGS += -Wno-c++98-compat-pedantic
+CPPUTEST_CXXFLAGS += -Wno-c++98-compat
+
 # --- LD_LIBRARIES -- Additional needed libraries can be added here.
 # commented out example specifies math library
 #LD_LIBRARIES += -lm
