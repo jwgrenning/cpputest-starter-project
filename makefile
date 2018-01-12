@@ -73,9 +73,22 @@ INCLUDE_DIRS =\
 CPPUTEST_OBJS_DIR = test-obj
 
 CPPUTEST_LIB_DIR = test-lib
+ 
+# You may have to tweak these compiler flags
+#    CPPUTEST_WARNINGFLAGS - apply to C and C++
+#    CPPUTEST_CFLAGS - apply to C files only
+#    CPPUTEST_CXXFLAGS - apply to C++ files on;y
+#    CPPUTEST_CPPFLAGS - apply to C and C++ Pre-Processor
+#
+# If you get an error like this
+#     TestPlugin.h:93:59: error: 'override' keyword is incompatible 
+#        with C++98 [-Werror,-Wc++98-compat] ...
+# The compiler is basically telling you how to fix the 
+# build problem.  You would add this flag setting
+#     CPPUTEST_CXXFLAGS += -Wno-c++14-compat
 
-# Figure out how to ask if gcc7 vs clang, gcc7 only right now
-#ifeq "1" "1"
+
+
 
 ifeq ($(shell $(CC) -v 2>&1 | grep -c "clang"), 1)
 CPPUTEST_WARNINGFLAGS += -Wno-unknown-warning-option
@@ -88,6 +101,7 @@ endif
 
 CPPUTEST_WARNINGFLAGS += -Wall 
 CPPUTEST_WARNINGFLAGS += -Werror
+CPPUTEST_WARNINGFLAGS += -Wfatal-errors
 CPPUTEST_WARNINGFLAGS += -Wswitch-default
 CPPUTEST_WARNINGFLAGS += -Wno-format-nonliteral
 CPPUTEST_WARNINGFLAGS += -Wno-sign-conversion 
