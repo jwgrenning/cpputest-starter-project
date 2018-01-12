@@ -81,9 +81,9 @@ CPPUTEST_LIB_DIR = test-lib
 #    CPPUTEST_CPPFLAGS - apply to C and C++ Pre-Processor
 #
 # If you get an error like this
-#     TestPlugin.h:93:59: error: 'override' keyword is incompatible 
+#     TestPlugin.h:93:59: error: 'override' keyword is incompatible
 #        with C++98 [-Werror,-Wc++98-compat] ...
-# The compiler is basically telling you how to fix the 
+# The compiler is basically telling you how to fix the
 # build problem.  You would add this flag setting
 #     CPPUTEST_CXXFLAGS += -Wno-c++14-compat
 
