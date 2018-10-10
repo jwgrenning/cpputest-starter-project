@@ -30,7 +30,7 @@ failWhenTargetExists()
 usage $@
 failWhenTargetExists $EXPLODING_FAKES_FILE
 
-echo '#include "simplefakes.h"' > $EXPLODING_FAKES_FILE
+echo '#include "explodingfake.h"' > $EXPLODING_FAKES_FILE
 echo "" >> $EXPLODING_FAKES_FILE
 grep reference $LINKER_ERROR_FILE | \
     sed -e's/^.*"_/EXPLODING_FAKE_FOR(/' \
