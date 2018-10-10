@@ -14,29 +14,29 @@ endif
 # Use SRC_FILES to specifiy individual production
 # code files.
 # These files are compiled and put into the
-# ProductionCode library and links with the test runner
-SRC_FILES = example-src/Example.c
+# a library and links with the test runner.
+# This is so that test code can override production code at link time.
+SRC_FILES += example-src/Example.c
 
 # --- SRC_DIRS ---
 # Use SRC_DIRS to specifiy production directories
 # code files.
 # These files are compiled and put into a the
 # ProductionCode library and links with the test runner
-SRC_DIRS = \
-	example-platform
+SRC_DIRS += example-platform
 
 # --- TEST_SRC_FILES ---
 # TEST_SRC_FILES specifies individual test files to build.  Test
 # files are always included in the build and they
 # pull in production code from the library
-TEST_SRC_FILES = \
+TEST_SRC_FILES +=
 
 # --- TEST_SRC_DIRS ---
 # Like TEST_SRC_FILES, but biulds everyting in the directory
-TEST_SRC_DIRS = \
-	tests/io-cppumock \
-	tests/exploding-fakes \
-	tests \
+TEST_SRC_DIRS += tests
+TEST_SRC_DIRS += tests/io-cppumock
+TEST_SRC_DIRS += tests/exploding-fakes
+TEST_SRC_DIRS += tests/exploding-fakes
 
 #	tests/example-fff \
 #	tests/fff \
@@ -44,27 +44,24 @@ TEST_SRC_DIRS = \
 # MOCKS_SRC_DIRS specifies a directories where you can put your
 # mocks, stubs and fakes.  You can also just put them
 # in TEST_SRC_DIRS
-MOCKS_SRC_DIRS = \
+MOCKS_SRC_DIRS +=
 
 # Turn on CppUMock
 CPPUTEST_USE_EXTENSIONS = Y
 
-INCLUDE_DIRS =\
-  .\
-  $(CPPUTEST_HOME)/include/ \
-  $(CPPUTEST_HOME)/include/Platforms/Gcc \
-  example-src \
-  example-include \
-  example-fff \
-  test/exploding-fakes \
-  tests/fff
+INCLUDE_DIRS += $(CPPUTEST_HOME)/include
+INCLUDE_DIRS += $(CPPUTEST_HOME)/include/Platforms/Gcc
+INCLUDE_DIRS += example-include
+INCLUDE_DIRS += example-fff
+INCLUDE_DIRS += tests/exploding-fakes
+INCLUDE_DIRS += tests/fff
 
 
 # --- CPPUTEST_OBJS_DIR ---
 # if you have to use "../" to get to your source path
-# the makefile will put the .o and .d files in surprising 
+# the makefile will put the .o and .d files in surprising
 # places.
-# To make up for each level of "../", add place holder 
+# To make up for each level of "../", add place holder
 # sub directories in CPPUTEST_OBJS_DIR
 # each "../".  It is kind of a kludge, but it causes the
 # .o and .d files to be put under objs.
@@ -73,7 +70,7 @@ INCLUDE_DIRS =\
 CPPUTEST_OBJS_DIR = test-obj
 
 CPPUTEST_LIB_DIR = test-lib
- 
+
 # You may have to tweak these compiler flags
 #    CPPUTEST_WARNINGFLAGS - apply to C and C++
 #    CPPUTEST_CFLAGS - apply to C files only
@@ -99,13 +96,13 @@ CPPUTEST_WARNINGFLAGS += -Wno-documentation
 CPPUTEST_WARNINGFLAGS += -Wno-missing-noreturn
 endif
 
-CPPUTEST_WARNINGFLAGS += -Wall 
+CPPUTEST_WARNINGFLAGS += -Wall
 CPPUTEST_WARNINGFLAGS += -Werror
 CPPUTEST_WARNINGFLAGS += -Wfatal-errors
 CPPUTEST_WARNINGFLAGS += -Wswitch-default
 CPPUTEST_WARNINGFLAGS += -Wno-format-nonliteral
-CPPUTEST_WARNINGFLAGS += -Wno-sign-conversion 
-CPPUTEST_WARNINGFLAGS += -Wno-pedantic 
+CPPUTEST_WARNINGFLAGS += -Wno-sign-conversion
+CPPUTEST_WARNINGFLAGS += -Wno-pedantic
 CPPUTEST_WARNINGFLAGS += -Wno-shadow
 CPPUTEST_WARNINGFLAGS += -Wno-missing-field-initializers
 CPPUTEST_WARNINGFLAGS += -Wno-unused-parameter
