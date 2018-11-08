@@ -31,7 +31,26 @@ usage $@
 failWhenTargetExists $EXPLODING_FAKES_FILE
 
 echo '#include "explodingfake.h"' > $EXPLODING_FAKES_FILE
+echo '//#include "explodingfake.hpp"' >> $EXPLODING_FAKES_FILE
 echo "" >> $EXPLODING_FAKES_FILE
+echo "/*" >> $EXPLODING_FAKES_FILE
+echo " For use with C++ linkage unresolved external references:" >> $EXPLODING_FAKES_FILE
+echo "    * Remove 'explodingfake.h' and uncomment 'explodingfake.hpp'." >> $EXPLODING_FAKES_FILE
+echo "    * Add header files for the referenced C++ functions in your generated exploding-fakes.cpp file." >> $EXPLODING_FAKES_FILE
+echo "    * For functions with return types, use the EXPLODING_VALUE_FAKE_FOR macro." >> $EXPLODING_FAKES_FILE
+echo "" >> $EXPLODING_FAKES_FILE
+echo " For use with C linkage unresolved external references:" >> $EXPLODING_FAKES_FILE
+echo "    * You should be good to add the generated file to your test build." >> $EXPLODING_FAKES_FILE
+echo "    * Do not include the header files for the referenced functions. The linker does not care." >> $EXPLODING_FAKES_FILE
+echo "" >> $EXPLODING_FAKES_FILE
+echo " Note: a EXPLODING_FAKE_FOR() is generated for global variable too." >> $EXPLODING_FAKES_FILE
+echo "    * They will explode upong write :-)" >> $EXPLODING_FAKES_FILE
+echo "" >> $EXPLODING_FAKES_FILE
+echo " If you need both C and C++ linkage" >> $EXPLODING_FAKES_FILE
+echo "    * Put all the C linkage files in a .c file." >> $EXPLODING_FAKES_FILE
+echo "    * Put all the C++ linkage files in a .cpp file." >> $EXPLODING_FAKES_FILE
+echo "" >> $EXPLODING_FAKES_FILE
+echo "*/" >> $EXPLODING_FAKES_FILE
 grep reference $LINKER_ERROR_FILE | \
     sed -e's/^.*"_/EXPLODING_FAKE_FOR(/' \
     -e's/".*/)/' \
