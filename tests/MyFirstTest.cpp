@@ -3,7 +3,7 @@
 extern "C"
 {
 	/*
-	 * You can add your c-only include files here
+	 * Add your c-only include files here
 	 */
 }
 
@@ -20,8 +20,10 @@ TEST_GROUP(MyCode)
 
 TEST(MyCode, test1)
 {
+   FAIL("Your test is running! Now delete this line and watch your test pass.");
     /*
-     * Instantiate your class, or call the function, you want to test
+     * Instantiate your class, or call the function, you want to test.
+     * Then delete this comment
      */
 }
 

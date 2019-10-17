@@ -2,7 +2,7 @@
 SILENCE = @
 
 #---- Outputs ----#
-COMPONENT_NAME = example
+COMPONENT_NAME = rename_me
 
 #--- Inputs ----#
 PROJECT_HOME_DIR = .
@@ -10,36 +10,39 @@ ifeq "$(CPPUTEST_HOME)" ""
     CPPUTEST_HOME = ~/tools/cpputest
 endif
 
-# --- SRC_FILES ---
-# Use SRC_FILES to specifiy individual production
+# --- SRC_FILES and SRC_DIRS ---
+# Production code files are compiled and put into 
+# a library to link with the test runner.
+#
+# Test code of the same name overrides
+# production code at link time.
+#
+# SRC_FILES specifies individual production
 # code files.
-# These files are compiled and put into the
-# a library and links with the test runner.
-# This is so that test code can override production code at link time.
+#
+# SRC_DIRS specifies directories containing
+# production code C and CPP files.
+#
 SRC_FILES += example-src/Example.c
-
-# --- SRC_DIRS ---
-# Use SRC_DIRS to specifiy production directories
-# code files.
-# These files are compiled and put into a the
-# ProductionCode library and links with the test runner
 SRC_DIRS += example-platform
 
-# --- TEST_SRC_FILES ---
-# TEST_SRC_FILES specifies individual test files to build.  Test
-# files are always included in the build and they
-# pull in production code from the library
-TEST_SRC_FILES +=
+# --- TEST_SRC_FILES and TEST_SRC_DIRS ---
+# Test files are always included in the build.
+# Production code is pulled into the build unless
+# it is overriden by code of the same name in the
+# test code.
+#
+# TEST_SRC_FILES specifies individual test files to build.  
+# TEST_SRC_DIRS, builds everything in the directory
 
-# --- TEST_SRC_DIRS ---
-# Like TEST_SRC_FILES, but biulds everyting in the directory
+TEST_SRC_FILES +=
 TEST_SRC_DIRS += tests
 TEST_SRC_DIRS += tests/io-cppumock
 TEST_SRC_DIRS += tests/exploding-fakes
 TEST_SRC_DIRS += tests/exploding-fakes
-
 #	tests/example-fff \
 #	tests/fff \
+
 # --- MOCKS_SRC_DIRS ---
 # MOCKS_SRC_DIRS specifies a directories where you can put your
 # mocks, stubs and fakes.  You can also just put them
@@ -49,6 +52,8 @@ MOCKS_SRC_DIRS +=
 # Turn on CppUMock
 CPPUTEST_USE_EXTENSIONS = Y
 
+# INCLUDE_DIRS are searched in order after the included file's
+# containing directory
 INCLUDE_DIRS += $(CPPUTEST_HOME)/include
 INCLUDE_DIRS += $(CPPUTEST_HOME)/include/Platforms/Gcc
 INCLUDE_DIRS += example-include
@@ -58,15 +63,20 @@ INCLUDE_DIRS += tests/fff
 
 
 # --- CPPUTEST_OBJS_DIR ---
-# if you have to use "../" to get to your source path
+# CPPUTEST_OBJS_DIR lets you control where the
+# build artifact (.o and .d) files are stored.
+#
+# If you have to use "../" to get to your source path
 # the makefile will put the .o and .d files in surprising
 # places.
-# To make up for each level of "../", add place holder
-# sub directories in CPPUTEST_OBJS_DIR
-# each "../".  It is kind of a kludge, but it causes the
-# .o and .d files to be put under objs.
+#
+# To make up for each level of "../"in the source path,
+# add place holder subdirectories to CPPUTEST_OBJS_DIR
+# each.  
 # e.g. if you have "../../src", set to "test-objs/1/2"
-# This is set no "../" in the source path.
+#
+# This is kind of a kludge, but it causes the
+# .o and .d files to be put under objs.
 CPPUTEST_OBJS_DIR = test-obj
 
 CPPUTEST_LIB_DIR = test-lib
@@ -87,6 +97,7 @@ CPPUTEST_LIB_DIR = test-lib
 
 
 
+# Some flags to quiet clang
 ifeq ($(shell $(CC) -v 2>&1 | grep -c "clang"), 1)
 CPPUTEST_WARNINGFLAGS += -Wno-unknown-warning-option
 CPPUTEST_WARNINGFLAGS += -Wno-covered-switch-default
@@ -106,7 +117,6 @@ CPPUTEST_WARNINGFLAGS += -Wno-pedantic
 CPPUTEST_WARNINGFLAGS += -Wno-shadow
 CPPUTEST_WARNINGFLAGS += -Wno-missing-field-initializers
 CPPUTEST_WARNINGFLAGS += -Wno-unused-parameter
-CPPUTEST_CFLAGS += -Wall
 CPPUTEST_CFLAGS += -pedantic
 CPPUTEST_CFLAGS += -Wno-missing-prototypes
 CPPUTEST_CFLAGS += -Wno-strict-prototypes

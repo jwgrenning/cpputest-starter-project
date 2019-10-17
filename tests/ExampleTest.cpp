@@ -16,7 +16,7 @@ TEST_GROUP(Example)
     }
 };
 
-TEST(Example, test1)
+TEST(Example, returns_1)
 {
     LONGS_EQUAL(1, example());
 }
