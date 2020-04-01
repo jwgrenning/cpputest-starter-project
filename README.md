@@ -9,7 +9,7 @@ In Mac and Linux you will need gcc, make and autotools.
 
 In windows, I find cygwin (http://www.cygwin.com/) is the least trouble,  The install may take a couple hours.  Make sure to select the ‘Devel’ package in the installer.
 
-An even better windows approach is a linux virtual machine. 
+An even better windows approach is a linux virtual machine.
 
 ### 2) Download, Install and build CppUTest
 
@@ -28,7 +28,7 @@ autoreconf . -i
 make tdd
 ```
 
-You should see CppUTest’s tests run.  If you get build errors, they are often easy to fix by looking at the error message.  Often it is a matter of disabling some warning.  You can also check with me or the cpputest google group.  Please let me know if there is a need for a change these directions.  
+You should see CppUTest’s tests run.  If you get build errors, they are often easy to fix by looking at the error message.  Often it is a matter of disabling some warning.  You can also check with me or the cpputest google group.  Please let me know if there is a need for a change these directions.
 
 ### 3) Define CPPUTEST_HOME
 

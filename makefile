@@ -11,7 +11,7 @@ ifeq "$(CPPUTEST_HOME)" ""
 endif
 
 # --- SRC_FILES and SRC_DIRS ---
-# Production code files are compiled and put into 
+# Production code files are compiled and put into
 # a library to link with the test runner.
 #
 # Test code of the same name overrides
@@ -32,7 +32,7 @@ SRC_DIRS += example-platform
 # it is overriden by code of the same name in the
 # test code.
 #
-# TEST_SRC_FILES specifies individual test files to build.  
+# TEST_SRC_FILES specifies individual test files to build.
 # TEST_SRC_DIRS, builds everything in the directory
 
 TEST_SRC_FILES +=
@@ -70,7 +70,7 @@ INCLUDE_DIRS += tests/fff
 #
 # To make up for each level of "../"in the source path,
 # add place holder subdirectories to CPPUTEST_OBJS_DIR
-# each.  
+# each.
 # e.g. if you have "../../src", set to "test-objs/1/2"
 #
 # This is kind of a kludge, but it causes the
