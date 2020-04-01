@@ -7,7 +7,8 @@ COMPONENT_NAME = rename_me
 #--- Inputs ----#
 PROJECT_HOME_DIR = .
 ifeq "$(CPPUTEST_HOME)" ""
-    CPPUTEST_HOME = ~/tools/cpputest
+$(error The environment variable CPPUTEST_HOME is not set. \
+Set it to where cpputest is installed)
 endif
 
 # --- SRC_FILES and SRC_DIRS ---
