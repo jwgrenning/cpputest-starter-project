@@ -82,7 +82,7 @@ CPPUTEST_LIB_DIR = test-lib
 # You may have to tweak these compiler flags
 #    CPPUTEST_WARNINGFLAGS - apply to C and C++
 #    CPPUTEST_CFLAGS - apply to C files only
-#    CPPUTEST_CXXFLAGS - apply to C++ files on;y
+#    CPPUTEST_CXXFLAGS - apply to C++ files only
 #    CPPUTEST_CPPFLAGS - apply to C and C++ Pre-Processor
 #
 # If you get an error like this
