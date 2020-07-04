@@ -102,4 +102,4 @@ You can run your test without any toolchain installed locally. You need to have 
 docker-compose run cpputest make all
 ```
 
-You should see the similar output to what is in 5). then you can go from there. 
+You should see the similar output to what is in 5) then you can go from there. 
