@@ -94,4 +94,12 @@ Keep working in small verifiable steps.  It's easier to keep your code working t
 
 When you get to linker errors for the code under test, go get my [exploding fakes generator](https://github.com/jwgrenning/gen-xfakes).  You can save liots of time with this simple linker-error to test stub converter.
 
+### 7) Docker support
 
+You can run your test without any toolchain installed locally. You need to have docker and docker-compose installed. Then type:
+
+```
+docker-compose run cpputest make all
+```
+
+You should see the similar output to what is in 5) then you can go from there. 

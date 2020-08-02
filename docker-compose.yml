@@ -1,0 +1,6 @@
+version: "3.6"
+services: 
+    cpputest:
+        build: .
+        volumes:
+            - ./:/home/src
