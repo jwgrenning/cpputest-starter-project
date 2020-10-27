@@ -42,7 +42,7 @@ Under cygwin, you can use a windows environment variable.
 
 ### 4) Move the starter project
 
-Move the starter project folder so that it is in the source repository with your production code. You want to be able to conveniently access your production code files and dependencies using relative paths.  For example /close-to-your-production-code/cpputest-starter-project. You might want to rename cpputest-starter-project to something line unit-tests once you integrate it into your repo.
+Move the starter project folder so that it is in the source repository with your production code. You want to be able to conveniently access your production code files and dependencies using relative paths.  For example /close-to-your-production-code/cpputest-starter-project. You might want to rename cpputest-starter-project to something like unit-tests once you integrate it into your repo.
 
 ### 5) Build the starter project
 From a terminal window, change the directory to the root of the starter project. The same directory where this file was found. The make all.
