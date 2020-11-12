@@ -9,7 +9,7 @@ In Mac and Linux you will need gcc, make and autotools.
 
 In windows, I find cygwin (http://www.cygwin.com/) is the least trouble,  The install may take a couple hours.  Make sure to select the ‘Devel’ package in the installer.
 
-An even better windows approach is a linux virtual machine.
+An even better windows approach is a linux virtual machine. One easy way to set up a linux virtual machine on windows is by enabling the Windows Subsytem for Linux (WSL), and then downloading your preferred linux flavor from the Windows App store (WSL setup tutorial: https://docs.microsoft.com/en-us/windows/wsl/install-win10). CppUTest can be installed and the starter project can be run using WSL and a linux terminal, after the following tools have been installed in the linux terminal: gcc, make, and GNU Autotools.
 
 ### 2) Download, Install and build CppUTest
 
