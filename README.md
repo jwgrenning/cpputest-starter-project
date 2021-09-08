@@ -1,15 +1,121 @@
 cpputest-starter-project
 ===========================
 
-This paper describes how to integrate CppUTest based off-target testing with your production code using the GCC toolchain environment.
+This paper describes how to integrate CppUTest based off-target testing with your production code using the GCC tool-chain environment.
+
+There are two basic approaches supported here.
+
+* Using Docker (preferred)
+* Using an installed tool-chain (subject to 'works on my machine' problems)
+
+## Docker
+
+You can run your test without any tool-chain installed locally with docker. You need to have docker and docker-compose installed. 
+
+### Install Docker
+
+* For Mac: start here https://docs.docker.com/desktop/mac/install/
+* For Windows: start here https://docs.docker.com/desktop/windows/install/
+* For Linux: search for instructions for your system.
+
+### The First Docker Build
+
+With docker installed, open a command prompt in the starter project root directory and run this command:
+
+```
+docker-compose run cpputest make all
+```
+
+The first time you run you'll see
+
+* Docker images downloaded
+ * you'll see download progress
+* CppUTest cloned, configured, built, and installed
+ * you'll see a lot of text flying by.
+* The started project is made and provides output like this
+
+```
+compiling AllTests.cpp
+compiling ExampleTest.cpp
+compiling MyFirstTest.cpp
+compiling io_CppUMock.cpp
+compiling io_CppUMockTest.cpp
+compiling io.c
+compiling Example.c
+Building archive test-lib/libmy_component.a
+a - test-obj/example-platform/io.o
+a - test-obj/example-src/Example.o
+Linking rename_me_tests
+Running rename_me_tests
+..
+tests/MyFirstTest.cpp:23: error: Failure in TEST(MyCode, test1)
+	Your test is running! Now delete this line and watch your test pass.
+
+..
+Errors (1 failures, 4 tests, 4 ran, 10 checks, 0 ignored, 0 filtered out, 1 ms)
+```
+
+### Using your test environment via the command line
+
+To re-run your test build, open the cpputest environment and keep a bash shell running like this:
+
+```
+% docker-compose run cpputest bash
+Creating cpputest-starter-project_cpputest_run ... done
+root@a9dfe0de546f:/home/src# 
+```
+
+Your prompt will have a different container ID than `a9dfe0de546f`.
+
+Run make and you'll see something like this
+
+```
+root@a9dfe0de546f:/home/src# make
+Running rename_me_tests
+..
+tests/MyFirstTest.cpp:23: error: Failure in TEST(MyCode, test1)
+	Your test is running! Now delete this line and watch your test pass.
+
+..
+Errors (1 failures, 4 tests, 4 ran, 10 checks, 0 ignored, 0 filtered out, 1 ms)
+
+make: *** [/home/cpputest/build/MakefileWorker.mk:464: all] Error 1
+root@a9dfe0de546f:/home/src#
+```
+
+Open your favorite editor and modify `tests/MyFirstTest.cpp`, deleting the line with `FAIL`.  Hot-key back to the bash prompt and make (\<up-arrow\> \<enter\>).  You'll see something like this:
+
+```
+root@a9dfe0de546f:/home/src# make
+compiling MyFirstTest.cpp
+Linking rename_me_tests
+Running rename_me_tests
+....
+OK (4 tests, 4 ran, 9 checks, 0 ignored, 0 filtered out, 1 ms)
+```
+
+### Integrate off-target testing into your development environment
+
+Drop the whole starter project into your product source directory and evolve it into what you need.  You can give the docker container access to your source and third-party header files by adding more `volumes` like `- ./:/home/src`. That maps the current directory `./` to `/home/src` in the docker container. 
+
+
+## Installed toolchain
 
 ### 1) Install gcc toolchain
 
+** Mac and Linux **
+
 In Mac and Linux you will need gcc, make and autotools.
+
+** Windows Cygwin **
 
 In windows, I find cygwin (http://www.cygwin.com/) is the least trouble,  The install may take a couple hours.  Make sure to select the ‘Devel’ package in the installer.
 
-An even better windows approach is a linux virtual machine. One easy way to set up a linux virtual machine on windows is by enabling the Windows Subsytem for Linux (WSL), and then downloading your preferred linux flavor from the Windows App store (WSL setup tutorial: https://docs.microsoft.com/en-us/windows/wsl/install-win10). CppUTest can then be installed from source via the WSL / linux terminal. After CppUTest is installed the starter project can be run using WSL and a linux terminal, after the following tools have been installed in the linux terminal: gcc, make, and GNU Autotools.
+** Windows with Linux Virtual Machine **
+
+(consider the docker approach)
+
+Set up a linux virtual machine on windows is by enabling the Windows Subsytem for Linux (WSL), and then downloading your preferred linux flavor from the Windows App store (WSL setup tutorial: https://docs.microsoft.com/en-us/windows/wsl/install-win10). CppUTest can then be installed from source via the WSL / linux terminal. After CppUTest is installed the starter project can be run using WSL and a linux terminal, after the following tools have been installed in the linux terminal: gcc, make, and GNU Autotools.
 
 ### 2) Download, Install and build CppUTest
 
@@ -94,12 +200,3 @@ Keep working in small verifiable steps.  It's easier to keep your code working t
 
 When you get to linker errors for the code under test, go get my [exploding fakes generator](https://github.com/jwgrenning/gen-xfakes).  You can save liots of time with this simple linker-error to test stub converter.
 
-### 7) Docker support
-
-You can run your test without any toolchain installed locally. You need to have docker and docker-compose installed. Then type:
-
-```
-docker-compose run cpputest make all
-```
-
-You should see the similar output to what is in 5) then you can go from there. 
