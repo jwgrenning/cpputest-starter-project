@@ -30,6 +30,7 @@ The first time you run you'll see
 
 * Docker images downloaded
 * CppUTest cloned, configured, built, and installed
+* legacy-build cloned, and tests run
 * Finally, the started project is made and provides output
 
 Like this:
@@ -60,7 +61,7 @@ Errors (1 failures, 4 tests, 4 ran, 10 checks, 0 ignored, 0 filtered out, 1 ms)
 To re-run your test build, open the cpputest environment and keep a bash shell running like this:
 
 ```
-% docker-compose run cpputest bash
+% docker run -it cpputest bash
 Creating cpputest-starter-project_cpputest_run ... done
 root@a9dfe0de546f:/home/src# 
 ```
