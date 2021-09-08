@@ -29,10 +29,10 @@ docker-compose run cpputest make all
 The first time you run you'll see
 
 * Docker images downloaded
- * you'll see download progress
 * CppUTest cloned, configured, built, and installed
- * you'll see a lot of text flying by.
-* The started project is made and provides output like this
+* Finally, the started project is made and provides output
+
+Like this:
 
 ```
 compiling AllTests.cpp
