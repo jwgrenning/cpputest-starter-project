@@ -103,15 +103,15 @@ Drop the whole starter project into your product source directory and evolve it 
 
 ### 1) Install gcc toolchain
 
-** Mac and Linux **
+**Mac and Linux**
 
 In Mac and Linux you will need gcc, make and autotools.
 
-** Windows Cygwin **
+**Windows Cygwin**
 
 In windows, I find cygwin (http://www.cygwin.com/) is the least trouble,  The install may take a couple hours.  Make sure to select the ‘Devel’ package in the installer.
 
-** Windows with Linux Virtual Machine **
+**Windows with Linux Virtual Machine**
 
 (consider the docker approach)
 
