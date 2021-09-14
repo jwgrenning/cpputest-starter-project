@@ -23,7 +23,7 @@ You can run your test without any tool-chain installed locally with docker. You 
 With docker installed, open a command prompt in the starter project root directory and run this command:
 
 ```
-docker-compose run cpputest make all
+docker-compose run --rm cpputest make all
 ```
 
 The first time you run you'll see
