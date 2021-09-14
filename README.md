@@ -84,6 +84,8 @@ make: *** [/home/cpputest/build/MakefileWorker.mk:464: all] Error 1
 root@a9dfe0de546f:/home/src#
 ```
 
+If you exited the docker `cpputest_test_runner` container now, the status of the last command is returned.  You would see `ERROR: 2` as the exit status.
+
 Open your favorite editor and modify `tests/MyFirstTest.cpp`, deleting the line with `FAIL`.  Hot-key back to the bash prompt and make (\<up-arrow\> \<enter\>).  You'll see something like this:
 
 ```
@@ -94,6 +96,9 @@ Running rename_me_tests
 ....
 OK (4 tests, 4 ran, 9 checks, 0 ignored, 0 filtered out, 1 ms)
 ```
+
+If you exited the docker `cpputest_test_runner` container now, the status of the last command is returned.  You would not see an error exit status.
+
 
 ### Integrate off-target testing into your development environment
 
