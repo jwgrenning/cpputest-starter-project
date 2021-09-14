@@ -61,7 +61,7 @@ Errors (1 failures, 4 tests, 4 ran, 10 checks, 0 ignored, 0 filtered out, 1 ms)
 To re-run your test build, open the cpputest environment and keep a bash shell running like this:
 
 ```
-% docker run -it cpputest bash
+% docker-compose run --entrypoint /bin/bash cpputest
 Creating cpputest-starter-project_cpputest_run ... done
 root@a9dfe0de546f:/home/src# 
 ```
