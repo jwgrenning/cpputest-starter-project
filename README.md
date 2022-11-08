@@ -42,9 +42,7 @@ There are two basic approaches supported here.
 
 </summary>
 
-You can run your tests without any tool-chain installed in your local machine with docker. You need to have docker installed.
-
-With docker, you will have an `image` of a machine that can be run in a `container`.
+You can run your tests without any tool-chain installed in your local machine with docker. You will need to  install docker.  With docker, you will have an `image` of a machine that can be run in a `container`.  Think of it as a lightweight and pre-configured virtual machine.
 
 ### Install Docker
 
@@ -125,7 +123,7 @@ You can run without parameters to get to the command line.  The current director
 
 You can mount other directories in your container by editing `docker/run.sh`.
 
-Given some directory holding needed dependencies, map it into the containter.
+Given some directory holding needed dependencies, map it into the container.
 
 ```
 DIR_ON_HOST=/some/path/to/something
@@ -169,7 +167,7 @@ In windows, I find cygwin (http://www.cygwin.com/) is the least trouble,  The in
 
 (consider the docker approach)
 
-Set up a linux virtual machine on windows is by enabling the Windows Subsytem for Linux (WSL), and then downloading your preferred linux flavor from the Windows App store (WSL setup tutorial: https://docs.microsoft.com/en-us/windows/wsl/install-win10). CppUTest can then be installed from source via the WSL / linux terminal. After CppUTest is installed the starter project can be run using WSL and a linux terminal, after the following tools have been installed in the linux terminal: gcc, make, and GNU Autotools.
+Set up a linux virtual machine on windows is by enabling the Windows Subsytem for Linux (WSL), and then downloading your preferred linux flavor from the Windows App store (WSL setup tutorial: https://docs.microsoft.com/en-us/windows/wsl/install-win10). CppUTest can then be installed from source via the WSL / linux terminal. After CppUTest is installed the starter project can be run using WSL and a linux terminal, after the following tools have been installed in the linux terminal: gcc, make, and GNU autotools.
 
 ### 2) Download, Install and build CppUTest
 
