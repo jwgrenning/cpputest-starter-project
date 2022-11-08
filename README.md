@@ -40,7 +40,7 @@ There are two basic approaches supported here.
 <details>
 <summary>
 
-## Docker (preferred)
+## Run Tests in a Docker Container (preferred)
 
 </summary>
 
@@ -148,7 +148,7 @@ Now that I've got you started, you may want to make this your own.  You can modi
 <details>
 <summary>
 
-## Use an Installed toolchain
+## Run Tests with an Installed toolchain
 
 
 </summary>
