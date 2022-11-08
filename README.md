@@ -13,7 +13,7 @@ Clone the starter-kit like this:
 cd <production-code-dir-root>
 git clone https://github.com/jwgrenning/cpputest-starter-project unit-tests
 ```
-Once you have a test running, check this into your repo.
+Once you complete this instructions, and endup with a test running, check this into your repo.
 
 You will find some helpful examples in the starter kit.  Eventually, you'll probably toss the starter-kit examples because you'll have your own.
 
@@ -65,7 +65,8 @@ sudo docker pull jwgrenning/cpputest-runner
 #### Run the image in a container
 
 ```
-./docker.run.sh make
+cd unit-tests
+./docker/run.sh make
 ```
 
 You'll see something like this
@@ -115,7 +116,12 @@ You can run [legacy-build](https://github.com/jwgrenning/legacy-build.git).  Thi
 You can run without parameters to get to the command line.  The current directory is mounted in the container.
 
 ```
-./docker/run.sh legacy-build
+./docker/run.sh
+```
+
+You'll see something like this
+```
+root@a564a6d5ee5b:/home/src#
 ```
 
 #### Mount Other Directories in the Container
