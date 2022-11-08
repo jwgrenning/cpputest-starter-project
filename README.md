@@ -35,14 +35,14 @@ There are two basic approaches supported here.
 
   You can give the docker container access to your source and third-party header files by adding more `volumes` like `- ./:/home/src`. That maps the current directory `./` to `/home/src` in the docker container. 
 
+----
+
 <details>
 <summary>
 
 ## Docker (preferred)
 
-
 </summary>
-
 
 You can run your tests without any tool-chain installed in your local machine with docker. You need to have docker installed.
 
@@ -143,8 +143,6 @@ Now that I've got you started, you may want to make this your own.  You can modi
 
 </details>
 
-
-
 ----
 
 <details>
@@ -236,13 +234,13 @@ make: *** [/home/cpputest/build/MakefileWorker.mk:458: all] Error 1
 ```
 
 </details>
+
 ----
 
 <details>
 <summary>
 
 ## Make MyFirstTest Pass
-
 
 </summary>
 
@@ -266,3 +264,4 @@ Keep working in small verifiable steps.  **It's easier to keep your code working
 
 Try the legacy-build script.  It is included in the docker image.  It will help track down r=dependencies and also generate exploding fakes when you get to linker errors.
 
+</details>
