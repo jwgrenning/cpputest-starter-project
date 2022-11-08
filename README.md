@@ -15,7 +15,7 @@ git clone https://github.com/jwgrenning/cpputest-starter-project unit-tests
 ```
 Once you have a test running, check this into your repo.
 
-You will find a some helpful examples in the starter kit.  Eventually, you'll probably toss the starter-kit examples because you'll have your own.
+You will find some helpful examples in the starter kit.  Eventually, you'll probably toss the starter-kit examples because you'll have your own.
 
 #### Handy things included
 
@@ -32,8 +32,6 @@ There are two basic approaches supported here.
 
 * Using Docker (preferred)
 * Using an installed tool-chain (subject to 'works on my machine' problems)
-
-  You can give the docker container access to your source and third-party header files by adding more `volumes` like `- ./:/home/src`. That maps the current directory `./` to `/home/src` in the docker container. 
 
 ----
 
@@ -121,6 +119,9 @@ You can run without parameters to get to the command line.  The current director
 ```
 ./docker/run.sh legacy-build
 ```
+
+#### Mount Other Directories in the Container
+
 
 You can mount other directories in your container by editing `docker/run.sh`.
 
