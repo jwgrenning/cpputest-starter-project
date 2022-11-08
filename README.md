@@ -1,16 +1,52 @@
 cpputest-starter-project
 ===========================
 
-This paper describes how to integrate CppUTest based off-target testing with your production code using the GCC tool-chain environment.
+The cpputest-starter-project can help you integrate CppUTest based off-target testing with your production code.
+
+### Integrate off-target testing into your development environment
+
+Drop the whole starter project into your product source directory and evolve it into what you need.  You can clone or download this repo into your production code directory structure.  You will need to access your files from the `makefile` in the starter-kit directory using relative directory paths.
+
+Clone the starter-kit like this:
+
+```
+cd <production-code-dir-root>
+git clone https://github.com/jwgrenning/cpputest-starter-project unit-tests
+```
+Once you have a test running, check this into your repo.
+
+You will find a some helpful examples in the starter kit.  Eventually, you'll probably toss the starter-kit examples because you'll have your own.
+
+#### Handy things included
+
+* A failing test, ready to help bootstrap your first test.
+* Legacy build script
+* Exploding fakes generator
+* MockIO examples
+* Fake Function Framework (FFF) examples 
+* A spy implementation to override `printf` and capture printed output.
+
+### Run your tests off-target
 
 There are two basic approaches supported here.
 
 * Using Docker (preferred)
 * Using an installed tool-chain (subject to 'works on my machine' problems)
 
-## Docker
+  You can give the docker container access to your source and third-party header files by adding more `volumes` like `- ./:/home/src`. That maps the current directory `./` to `/home/src` in the docker container. 
 
-You can run your test without any tool-chain installed locally with docker. You need to have docker and docker-compose installed. 
+<details>
+<summary>
+
+## Docker (preferred)
+
+
+</summary>
+
+
+You can run your tests without any tool-chain installed in your local machine with docker. You need to have docker installed.
+
+With docker, you will have an `image` of a machine that can be run in a `container`.
 
 ### Install Docker
 
@@ -18,22 +54,25 @@ You can run your test without any tool-chain installed locally with docker. You 
 * For Windows: start here https://docs.docker.com/desktop/windows/install/
 * For Linux: search for instructions for your system.
 
-### The First Docker Build
+### Get or build a test-runner
 
-With docker installed, open a command prompt in the starter project root directory and run this command:
+You can use my pre-built test-runner docker image, or you can build your own with the provided bash scripts.  Windows users, you'll need to translate the scripts for windows. All my examples here use bash.
+
+#### Using the pre-built test-runner docker image
+
+Pull the docker image from docker hub.
 
 ```
-docker-compose run cpputest make all
+sudo docker pull jwgrenning/cpputest-runner
 ```
 
-The first time you run you'll see
+#### Run the image in a container
 
-* Docker images downloaded
-* CppUTest cloned, configured, built, and installed
-* legacy-build cloned, and tests run
-* Finally, the started project is made and provides output
+```
+./docker.run.sh make
+```
 
-Like this:
+You'll see something like this
 
 ```
 compiling AllTests.cpp
@@ -41,71 +80,74 @@ compiling ExampleTest.cpp
 compiling MyFirstTest.cpp
 compiling io_CppUMock.cpp
 compiling io_CppUMockTest.cpp
+compiling FormatOutputSpyTest.cpp
+compiling FormatOutput.c
+compiling FormatOutputSpy.c
 compiling io.c
 compiling Example.c
-Building archive test-lib/libmy_component.a
+Building archive test-lib/libyour.a
 a - test-obj/example-platform/io.o
 a - test-obj/example-src/Example.o
-Linking rename_me_tests
-Running rename_me_tests
-..
+Linking your_tests
+Running your_tests
+.......
 tests/MyFirstTest.cpp:23: error: Failure in TEST(MyCode, test1)
 	Your test is running! Now delete this line and watch your test pass.
 
 ..
-Errors (1 failures, 4 tests, 4 ran, 10 checks, 0 ignored, 0 filtered out, 1 ms)
+Errors (1 failures, 9 tests, 9 ran, 15 checks, 0 ignored, 0 filtered out, 1 ms)
+
+make: *** [/home/cpputest/build/MakefileWorker.mk:458: all] Error 1
 ```
 
-### Using your test environment via the command line
+You are ready to write your first test!
 
-To re-run your test build, open the cpputest environment and keep a bash shell running like this:
+#### Other test runner options
 
-```
-% docker-compose run --rm --entrypoint /bin/bash cpputest
-Creating cpputest-starter-project_cpputest_run ... done
-root@a9dfe0de546f:/home/src# 
-```
-
-Your prompt will have a different container ID than `a9dfe0de546f`.
-
-Run make and you'll see something like this
+You can make clean, note the quotes for multiple word commands.
 
 ```
-root@a9dfe0de546f:/home/src# make
-Running rename_me_tests
-..
-tests/MyFirstTest.cpp:23: error: Failure in TEST(MyCode, test1)
-	Your test is running! Now delete this line and watch your test pass.
-
-..
-Errors (1 failures, 4 tests, 4 ran, 10 checks, 0 ignored, 0 filtered out, 1 ms)
-
-make: *** [/home/cpputest/build/MakefileWorker.mk:464: all] Error 1
-root@a9dfe0de546f:/home/src#
+./docker/run.sh "make clean"
 ```
 
-If you exited the docker `cpputest_test_runner` container now, the status of the last command is returned.  You would see `ERROR: 2` as the exit status.
-
-Open your favorite editor and modify `tests/MyFirstTest.cpp`, deleting the line with `FAIL`.  Hot-key back to the bash prompt and make (\<up-arrow\> \<enter\>).  You'll see something like this:
+You can run [legacy-build](https://github.com/jwgrenning/legacy-build.git).  This script is helpful when you are dragging never tested code into the test environment.
 
 ```
-root@a9dfe0de546f:/home/src# make
-compiling MyFirstTest.cpp
-Linking rename_me_tests
-Running rename_me_tests
-....
-OK (4 tests, 4 ran, 9 checks, 0 ignored, 0 filtered out, 1 ms)
+./docker/run.sh legacy-build
 ```
 
-If you exited the docker `cpputest_test_runner` container now, the status of the last command is returned.  You would not see an error exit status.
+You can run without parameters to get to the command line.  The current directory is mounted in the container.
+
+```
+./docker/run.sh legacy-build
+```
+
+You can mount other directories in your container by editing `docker/run.sh`.
+
+Given some directory holding needed dependencies, map it into the containter.
+
+```
+DIR_ON_HOST=/some/path/to/something
+DIR_IN_CONTAINER=/something
+```
+
+Add something like this to the `docker run` command options.  Don't forget the trailing `\` to escape the newline.
+
+```
+  --volume "${DIR_ON_HOST}":"${DIR_IN_CONTAINER}" \
+```
+
+#### Build your own docker image
+
+Now that I've got you started, you may want to make this your own.  You can modify `docker/build.sh` and `docker/run.sh` scripts as needed.  You will probably want to change the `TAG` if you plan on pushing your image to docker hub so you can share it between machines.
+
+</details>
 
 
-### Integrate off-target testing into your development environment
 
-Drop the whole starter project into your product source directory and evolve it into what you need.  You can give the docker container access to your source and third-party header files by adding more `volumes` like `- ./:/home/src`. That maps the current directory `./` to `/home/src` in the docker container. 
+----
 
-
-## Installed toolchain
+## Use an Installed toolchain
 
 ### 1) Install gcc toolchain
 
@@ -152,11 +194,8 @@ export CPPUTEST_HOME=/close-to-your-production-code/cpputest
 
 Under cygwin, you can use a windows environment variable.
 
-### 4) Move the starter project
+### 4) Build the starter project
 
-Move the starter project folder so that it is in the source repository with your production code. You want to be able to conveniently access your production code files and dependencies using relative paths.  For example /close-to-your-production-code/cpputest-starter-project. You might want to rename cpputest-starter-project to something like unit-tests once you integrate it into your repo.
-
-### 5) Build the starter project
 From a terminal window, change the directory to the root of the starter project. The same directory where this file was found. The make all.
 	cd /close-to-your-production-code/cpputest-starter-project
 	make all
@@ -169,22 +208,29 @@ compiling ExampleTest.cpp
 compiling MyFirstTest.cpp
 compiling io_CppUMock.cpp
 compiling io_CppUMockTest.cpp
+compiling FormatOutputSpyTest.cpp
+compiling FormatOutput.c
+compiling FormatOutputSpy.c
 compiling io.c
 compiling Example.c
-Building archive test-lib/libmy_component.a
+Building archive test-lib/libyour.a
 a - test-obj/example-platform/io.o
 a - test-obj/example-src/Example.o
-Linking rename_me_tests
-Running rename_me_tests
-..
+Linking your_tests
+Running your_tests
+.......
 tests/MyFirstTest.cpp:23: error: Failure in TEST(MyCode, test1)
-	Now delete this fail and watch the test pass.
+	Your test is running! Now delete this line and watch your test pass.
 
 ..
-Errors (1 failures, 4 tests, 4 ran, 10 checks, 0 ignored, 0 filtered out, 1 ms)
+Errors (1 failures, 9 tests, 9 ran, 15 checks, 0 ignored, 0 filtered out, 1 ms)
+
+make: *** [/home/cpputest/build/MakefileWorker.mk:458: all] Error 1
 ```
 
-### 6) Make MyFirstTest Fail
+----
+
+### 5) Make MyFirstTest Pass
 
 Edit cpputest-starter-project/tests/MyFirstTest.cpp and delete the line containing the FAIL. Watch the test pass.
 

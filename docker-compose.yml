@@ -1,7 +1,0 @@
-version: "3.6"
-services: 
-    cpputest:
-        build: .
-        image: cpputest_test_runner
-        volumes:
-            - ./:/home/src
