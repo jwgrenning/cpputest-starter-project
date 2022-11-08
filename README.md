@@ -147,7 +147,14 @@ Now that I've got you started, you may want to make this your own.  You can modi
 
 ----
 
+<details>
+<summary>
+
 ## Use an Installed toolchain
+
+
+</summary>
+
 
 ### 1) Install gcc toolchain
 
@@ -228,27 +235,34 @@ Errors (1 failures, 9 tests, 9 ran, 15 checks, 0 ignored, 0 filtered out, 1 ms)
 make: *** [/home/cpputest/build/MakefileWorker.mk:458: all] Error 1
 ```
 
+</details>
 ----
 
-### 5) Make MyFirstTest Pass
+<details>
+<summary>
+
+## Make MyFirstTest Pass
+
+
+</summary>
 
 Edit cpputest-starter-project/tests/MyFirstTest.cpp and delete the line containing the FAIL. Watch the test pass.
 
 ```
 compiling MyFirstTest.cpp
-Linking rename_me_tests
-Running rename_me_tests
-....
-OK (4 tests, 4 ran, 9 checks, 0 ignored, 0 filtered out, 1 ms)
+Linking your_tests
+Running your_tests
+.........
+OK (9 tests, 9 ran, 14 checks, 0 ignored, 0 filtered out, 0 ms)
 ```
 
-6) You are ready to start your first test.  The easiest way I have found is to follow this recipe:
+You are ready to start your first test.  The easiest way I have found is to follow this recipe:
 
 * [Get Your Legacy C into a Test Harness](https://wingman-sw.com/articles/tdd-legacy-c)
 
-Keep working in small verifiable steps.  It's easier to keep your code working than to fix it after you break it!
+On that page you'll find the recipe and a number of articles of specific problems you may run into.
 
-7) Linker errors to exploding fakes.
+Keep working in small verifiable steps.  **It's easier to keep your code working than to fix it after you break it!**
 
-When you get to linker errors for the code under test, go get my [exploding fakes generator](https://github.com/jwgrenning/gen-xfakes).  You can save liots of time with this simple linker-error to test stub converter.
+Try the legacy-build script.  It is included in the docker image.  It will help track down r=dependencies and also generate exploding fakes when you get to linker errors.
 
