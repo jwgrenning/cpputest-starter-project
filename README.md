@@ -65,7 +65,7 @@ sudo docker pull jwgrenning/cpputest-runner
 #### Run the image in a container
 
 ```
-cd unit-tests
+cd <production-code-dir-root>/unit-tests
 ./docker/run.sh make
 ```
 
@@ -165,28 +165,64 @@ Now that I've got you started, you may want to make this your own.  You can modi
 
 In Mac and Linux you will need gcc, make and autotools.
 
+Linux Ubuntu 20.04 instructions:
+```
+sudo apt update
+sudo apt install build-essential
+sudo apt install make
+sudo apt install autotools-dev
+sudo apt install autoconf
+sudo apt install libtool
+```
+
 **Windows Cygwin**
 
-In windows, I find cygwin (http://www.cygwin.com/) is the least trouble,  The install may take a couple hours.  Make sure to select the ‘Devel’ package in the installer.
+In windows, I find cygwin (http://www.cygwin.com/) is the least trouble,  The install may take a couple hours.  On the ‘Select Packages’ screen, make sure to mark the ‘Devel’ category for installation.
 
-**Windows with Linux Virtual Machine**
+**Windows with Linux Virtual Machine using WSL**
 
 (consider the docker approach)
 
-Set up a linux virtual machine on windows is by enabling the Windows Subsytem for Linux (WSL), and then downloading your preferred linux flavor from the Windows App store (WSL setup tutorial: https://docs.microsoft.com/en-us/windows/wsl/install-win10). CppUTest can then be installed from source via the WSL / linux terminal. After CppUTest is installed the starter project can be run using WSL and a linux terminal, after the following tools have been installed in the linux terminal: gcc, make, and GNU autotools.
+Set up a linux virtual machine on windows by enabling the Windows Subsytem for Linux (WSL), and then downloading your preferred linux flavor from the Windows App store (WSL setup tutorial: https://learn.microsoft.com/en-us/windows/wsl/install).
+Access the recently installed WSL linux terminal, install gcc, make and GNU autotools.
+
+Clone the starter-kit like this:
+
+```
+cd <production-code-dir-root>
+git clone https://github.com/jwgrenning/cpputest-starter-project unit-tests
+```
 
 ### 2) Download, Install and build CppUTest
 
-Download the latest from cpputest.org.  It is best to put it into a directory near your production code so it can be checked into your source repository.  You can also make CppUTest part of your git repo using a `git submodule`.
+It is best to put it into a directory near your production code so it can be checked into your source repository.
+```
+cd <production-code-dir-root>
+```
 
+You can download the version 4.0 using git:
+```
+git clone --branch v4.0 https://github.com/cpputest/cpputest.git
+```
+
+Alternatively, you can clone the github repository:
+```
+git clone https://github.com/cpputest/cpputest.git
+```
+
+CppUTest can also be added to your git repo as a git submodule.
 ```
 git submodule add https://github.com/cpputest/cpputest.git
 ```
 
-NOTE: My starter kit is not compatible with some of the install methods described on cpputest.org. You cannot ‘apt-get install cpputest’ for use with my starter kit.  Please install it as follows:
+For more alternatives on installing CppUTest, visit https://cpputest.org
+
+NOTE: cpputest-starter-project is not compatible with some of the install methods described on cpputest.org. You cannot ‘apt-get install cpputest’ for use with cpputest-starter-project.
+
+Build CppUTest:
 
 ```
-cd /close-to-your-production-code/cpputest
+cd <production-code-dir-root>/cpputest
 autoreconf . -i
 ./configure
 make tdd
@@ -198,17 +234,20 @@ You should see CppUTest’s tests run.  If you get build errors, they are often 
 
 Point  CPPUTEST_HOME to the root directory of CppUTest.  If you don't, the starter project makefile will not be able to find MakefileWorker.mk and the needed include and library files.
 
+Mac and Linux
 ```
-export CPPUTEST_HOME=/close-to-your-production-code/cpputest
+export CPPUTEST_HOME=<production-code-dir-root>/cpputest
 ```
 
 Under cygwin, you can use a windows environment variable.
 
 ### 4) Build the starter project
 
-From a terminal window, change the directory to the root of the starter project. The same directory where this file was found. The make all.
-	cd /close-to-your-production-code/cpputest-starter-project
-	make all
+From a terminal window, change the directory to the root of the starter project. The same directory where this file was found. Then make all.
+```
+cd <production-code-dir-root>/unit-tests
+make all
+```
 
 You should see output announcing each file compiling and finally running the tests like this (don't worry if the numbers don't match):
 
@@ -249,7 +288,7 @@ make: *** [/home/cpputest/build/MakefileWorker.mk:458: all] Error 1
 
 </summary>
 
-Edit cpputest-starter-project/tests/MyFirstTest.cpp and delete the line containing the FAIL. Watch the test pass.
+Edit \<production-code-dir-root\>/unit-tests/tests/MyFirstTest.cpp and delete the line containing the FAIL. Watch the test pass.
 
 ```
 compiling MyFirstTest.cpp
