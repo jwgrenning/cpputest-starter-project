@@ -249,7 +249,7 @@ make: *** [/home/cpputest/build/MakefileWorker.mk:458: all] Error 1
 
 </summary>
 
-Edit cpputest-starter-project/tests/MyFirstTest.cpp and delete the line containing the FAIL. Watch the test pass.
+Edit unit-tests/tests/MyFirstTest.cpp and delete the line containing the FAIL. Watch the test pass.
 
 ```
 compiling MyFirstTest.cpp
@@ -267,6 +267,6 @@ On that page you'll find the recipe and a number of articles of specific problem
 
 Keep working in small verifiable steps.  **It's easier to keep your code working than to fix it after you break it!**
 
-Try the legacy-build script.  It is included in the docker image.  It will help track down r=dependencies and also generate exploding fakes when you get to linker errors.
+Try the legacy-build script.  It is included in the docker image.  It will help track down dependencies and also generate exploding fakes when you get to linker errors.
 
 </details>
