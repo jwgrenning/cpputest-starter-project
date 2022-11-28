@@ -3,7 +3,7 @@
 TAG=jwgrenning/cpputest-runner
 
 HOST_WORKDIR=${PWD}
-WORKDIR=/home/src
+WORKDIR=/home
 COMMAND=${1:-/bin/bash}
 
 sudo docker run \

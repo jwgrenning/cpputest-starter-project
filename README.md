@@ -5,7 +5,7 @@ The cpputest-starter-project can help you integrate CppUTest based off-target te
 
 ### Integrate off-target testing into your development environment
 
-Drop the whole starter project into your product source directory and evolve it into what you need.  You can clone or download this repo into your production code directory structure.  You will need to access your files from the `makefile` in the starter-kit directory using relative directory paths.
+Drop the whole starter project into your product source directory and evolve it into what you need.  You can clone or download this repo into your production code directory structure.  You will need to access your files from the `makefile` in the starter-kit directory using relative directory paths.  
 
 Clone the starter-kit like this:
 
@@ -13,9 +13,29 @@ Clone the starter-kit like this:
 cd <production-code-dir-root>
 git clone https://github.com/jwgrenning/cpputest-starter-project unit-tests
 ```
-Once you complete this instructions, and endup with a test running, check this into your repo.
 
-You will find some helpful examples in the starter kit.  Eventually, you'll probably toss the starter-kit examples because you'll have your own.
+
+### Initial Example Product Repo Structure
+
+```
+your-project-root
+    |
+    |--- /cpputest (optionally in your repo)
+    |--- /include
+    |--- /src
+    |--- /platform
+    |--- makefile # for product build
+    |--- /unit-test # a.k.a the cpputest-starter-project
+           |
+           |--- example-include
+           |--- example-src
+           |--- example-platform
+           |--- tests
+           |--- makefile # for test-build
+
+```
+
+With the starter kit you have a working example.  So remember, it's easier to keep a system working than to fix after you break it.  So carefully morph the starer kit to be your own.
 
 #### Handy things included
 
@@ -26,7 +46,7 @@ You will find some helpful examples in the starter kit.  Eventually, you'll prob
 * Fake Function Framework (FFF) examples 
 * A spy implementation to override `printf` and capture printed output.
 
-### Run your tests off-target
+### Run the starter-project tests
 
 There are two basic approaches supported here.
 
@@ -56,7 +76,7 @@ You can use my pre-built test-runner docker image, or you can build your own wit
 
 #### Using the pre-built test-runner docker image
 
-Pull the docker image from docker hub.
+Pull the `jwgrenning/cpputest-runner` docker image from docker hub.
 
 ```
 sudo docker pull jwgrenning/cpputest-runner
@@ -65,8 +85,8 @@ sudo docker pull jwgrenning/cpputest-runner
 #### Run the image in a container
 
 ```
-cd unit-tests
-./docker/run.sh make
+cd your-project-root
+./unit-tests/docker/run.sh "make -C unit-test"
 ```
 
 You'll see something like this
@@ -99,41 +119,66 @@ make: *** [/home/cpputest/build/MakefileWorker.mk:458: all] Error 1
 
 You are ready to write your first test!
 
-#### Other test runner options
+#### What can the running docker container access?
 
-You can make clean, note the quotes for multiple word commands.
+Executing `docker/run.sh` from `your-project-root/` means that the files and directories in `your-project-root/` are visible to the docker container. You will be able to reference your files from `tests/makefile`.  Any header and source file dependencies needed by the code under test should also be accessible from `your-project-root/`. 
 
-```
-./docker/run.sh "make clean"
-```
+#### Make clean
 
-You can run [legacy-build](https://github.com/jwgrenning/legacy-build.git).  This script is helpful when you are dragging never tested code into the test environment.
+You can make clean.
 
 ```
-./docker/run.sh legacy-build
+./your-project-root/docker/run.sh "make -C unit-test clean"
 ```
 
-You can run without parameters to get to the command line.  The current directory is mounted in the container.
+#### Run legacy-build
+
+You can run the `legacy-build` script.  This script is helpful when you are dragging never tested code into the test environment. See [legacy-build](https://github.com/jwgrenning/legacy-build.git) for more information.
 
 ```
-./docker/run.sh
+./your-project-root/docker/run.sh "legacy-build make unit-test ."
+```
+
+This runs the `legacy-build` script, which
+ * runs `make`
+ * from the container's `unit-test` directory,
+ * with the container's `.` directory as the directory to search for missing include dependencies.
+
+#### Open a shell prompt in the container
+
+```
+./your-project-root/docker/run.sh
 ```
 
 You'll see something like this
 ```
-root@a564a6d5ee5b:/home/src#
+root@a564a6d5ee5b:/home#
 ```
+
+Note that `/home` refers to `./your-project-root/`
+
+From the prompt, you can execute commands like this:
+
+```
+make -C unit-test
+```
+
+```
+legacy-build make unit-test .
+```
+
+Runs `make` from the `unit-test` directory, and uses the current directory (`.`) as the root of the tree to search for missing include files.
+
 
 #### Mount Other Directories in the Container
 
+You can mount other directories in your container by making `docker/run.sh` your own.
 
-You can mount other directories in your container by editing `docker/run.sh`.
-
-Given some directory holding needed dependencies, map it into the container.
+Given some directory holding needed dependencies, map it into the container. 
 
 ```
 DIR_ON_HOST=/some/path/to/something
-DIR_IN_CONTAINER=/something
+DIR_IN_CONTAINER=/home/something
 ```
 
 Add something like this to the `docker run` command options.  Don't forget the trailing `\` to escape the newline.
@@ -142,9 +187,11 @@ Add something like this to the `docker run` command options.  Don't forget the t
   --volume "${DIR_ON_HOST}":"${DIR_IN_CONTAINER}" \
 ```
 
-#### Build your own docker image
+#### Make the Docker environment your own
 
-Now that I've got you started, you may want to make this your own.  You can modify `docker/build.sh` and `docker/run.sh` scripts as needed.  You will probably want to change the `TAG` if you plan on pushing your image to docker hub so you can share it between machines.
+Now that I've got you started, you may want to make this your own.  You can modify `docker/build.sh` and `docker/run.sh` scripts as needed.  You will want to change the `TAG` if you plan on pushing your image to docker hub so you can share it between machines.
+
+We've only scratched the surface of the Docker's capabilities.
 
 </details>
 
@@ -153,13 +200,13 @@ Now that I've got you started, you may want to make this your own.  You can modi
 <details>
 <summary>
 
-## Run Tests with an Installed toolchain
+## Run Tests with an Installed Tool-Chain
 
 
 </summary>
 
 
-### 1) Install gcc toolchain
+### 1) Install gcc tool-chain
 
 **Mac and Linux**
 
@@ -267,6 +314,6 @@ On that page you'll find the recipe and a number of articles of specific problem
 
 Keep working in small verifiable steps.  **It's easier to keep your code working than to fix it after you break it!**
 
-Try the legacy-build script.  It is included in the docker image.  It will help track down r=dependencies and also generate exploding fakes when you get to linker errors.
+Try the legacy-build script.  It is included in the docker image.  It will help track down include dependencies and also generate exploding fakes when you get to linker errors.
 
 </details>

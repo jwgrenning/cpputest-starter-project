@@ -26,4 +26,3 @@ TEST(MyCode, test1)
      * Then delete this comment
      */
 }
-
