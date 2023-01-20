@@ -1,4 +1,4 @@
-FROM gcc:11.2.0
+FROM gcc:12.2.0
 
 # Install cpputest
 WORKDIR /home/cpputest
