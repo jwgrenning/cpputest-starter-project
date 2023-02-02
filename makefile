@@ -126,6 +126,9 @@ CPPUTEST_CXXFLAGS += --std=c++11
 CPPUTEST_CXXFLAGS += -Wno-c++98-compat-pedantic
 CPPUTEST_CXXFLAGS += -Wno-c++98-compat
 
+# Coloroze output
+CPPUTEST_EXE_FLAGS += -c
+
 # --- LD_LIBRARIES -- Additional needed libraries can be added here.
 # commented out example specifies math library
 #LD_LIBRARIES += -lm

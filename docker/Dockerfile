@@ -14,6 +14,8 @@ ENV CPPUTEST_HOME=/opt/cpputest
 # Install leagcy-build
 WORKDIR /opt/legacy-build
 RUN git clone --depth 1 https://github.com/jwgrenning/legacy-build.git .
+RUN git config pull.ff only
+RUN git pull
 RUN git submodule update --init --recursive
 ENV LEGACY_BUILD="/opt/legacy-build"
 RUN echo '#!/bin/bash' >>/usr/bin/legacy-build && \
