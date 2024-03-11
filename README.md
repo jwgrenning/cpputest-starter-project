@@ -25,7 +25,7 @@ your-project-root
     |--- /src
     |--- /platform
     |--- makefile # for product build
-    |--- /unit-test # a.k.a the cpputest-starter-project
+    |--- /unit-tests # a.k.a the cpputest-starter-project
            |
            |--- example-include
            |--- example-src
@@ -86,7 +86,7 @@ sudo docker pull jwgrenning/cpputest-runner
 
 ```
 cd your-project-root
-./unit-tests/docker/run.sh "make -C unit-test"
+./unit-tests/docker/run.sh "make -C unit-tests"
 ```
 
 You'll see something like this
@@ -128,7 +128,7 @@ Executing `docker/run.sh` from `your-project-root/` means that the files and dir
 You can make clean.
 
 ```
-./your-project-root/docker/run.sh "make -C unit-test clean"
+./your-project-root/docker/run.sh "make -C unit-tests clean"
 ```
 
 #### Run legacy-build
@@ -136,12 +136,12 @@ You can make clean.
 You can run the `legacy-build` script.  This script is helpful when you are dragging never tested code into the test environment. See [legacy-build](https://github.com/jwgrenning/legacy-build.git) for more information.
 
 ```
-./your-project-root/docker/run.sh "legacy-build make unit-test ."
+./your-project-root/docker/run.sh "legacy-build make unit-tests ."
 ```
 
 This runs the `legacy-build` script, which
  * runs `make`
- * from the container's `unit-test` directory,
+ * from the container's `unit-tests` directory,
  * with the container's `.` directory as the directory to search for missing include dependencies.
 
 #### Open a shell prompt in the container
@@ -160,14 +160,14 @@ Note that `/home` refers to `./your-project-root/`
 From the prompt, you can execute commands like this:
 
 ```
-make -C unit-test
+make -C unit-tests
 ```
 
 ```
-legacy-build make unit-test .
+legacy-build make unit-tests .
 ```
 
-Runs `make` from the `unit-test` directory, and uses the current directory (`.`) as the root of the tree to search for missing include files.
+Runs `make` from the `unit-tests` directory, and uses the current directory (`.`) as the root of the tree to search for missing include files.
 
 
 #### Mount Other Directories in the Container
