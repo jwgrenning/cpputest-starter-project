@@ -11,7 +11,7 @@ Clone the starter-kit like this:
 
 ```
 cd <production-code-dir-root>
-git clone https://github.com/jwgrenning/cpputest-starter-project unit-tests
+git clone https://github.com/jwgrenning/cpputest-starter-project unit-test
 ```
 
 
@@ -86,7 +86,7 @@ sudo docker pull jwgrenning/cpputest-runner
 
 ```
 cd your-project-root
-./unit-tests/docker/run.sh "make -C unit-test"
+./unit-test/docker/run.sh "make -C unit-test"
 ```
 
 You'll see something like this
@@ -121,7 +121,7 @@ You are ready to write your first test!
 
 #### What can the running docker container access?
 
-Executing `docker/run.sh` from `your-project-root/` means that the files and directories in `your-project-root/` are visible to the docker container. You will be able to reference your files from `tests/makefile`.  Any header and source file dependencies needed by the code under test should also be accessible from `your-project-root/`. 
+Executing `docker/run.sh` from `your-project-root/` means that the files and directories in `your-project-root/` are visible to the docker container. You will be able to reference your files from `unit-test/makefile`.  Any header and source file dependencies needed by the code under test should also be accessible from `your-project-root/`. 
 
 #### Make clean
 
