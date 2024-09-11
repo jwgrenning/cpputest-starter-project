@@ -22,21 +22,21 @@ looks_like()
 
 
 declare -a not_declared=(
-    "not\ declared\ in\ this\ scope"
-    "unknown\ type\ name"
+    "not declared in this scope"
+    "unknown type name"
     )
 
 declare -a include_head=(
-    ".*\ error:\ '"
-    ".*\ error:\ "
+    ".* error: '"
+    ".* error: "
     )
 declare -a include_tail=(
-    ":\ No\ such\ file\ or\ directory"
-    "'\ file\ not\ found"
+    ": No such file or directory"
+    "' file not found"
     )
 declare -a linker_error_in_file=(
-    "error:\ ld"
-    "clang:\ error:\ linker"
+    "error: ld"
+    "clang: error: linker"
     "LNK2019"
     )
 
