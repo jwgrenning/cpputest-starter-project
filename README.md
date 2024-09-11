@@ -25,6 +25,7 @@ your-project-root
     |--- /src
     |--- /platform
     |--- makefile # for product build
+    |--- /legacy-build # scripts that help test existing code
     |--- /unit-test # a.k.a the cpputest-starter-project
            |
            |--- example-include
@@ -40,11 +41,10 @@ With the starter kit you have a working example.  So remember, it's easier to ke
 #### Handy things included
 
 * A failing test, ready to help bootstrap your first test.
-* Legacy build script
-* Exploding fakes generator
 * MockIO examples
 * Fake Function Framework (FFF) examples 
 * A spy implementation to override `printf` and capture printed output.
+* [Legacy build scripts](https://github.com/jwgrenning/legacy-build) with exploding fakes generator.
 
 ### Run the starter-project tests
 
@@ -243,7 +243,7 @@ You should see CppUTest’s tests run.  If you get build errors, they are often 
 
 ### 3) Define CPPUTEST_HOME
 
-Point  CPPUTEST_HOME to the root directory of CppUTest.  If you don't, the starter project makefile will not be able to find MakefileWorker.mk and the needed include and library files.
+Point CPPUTEST_HOME to the root directory of CppUTest.  If you don't, the starter project makefile will not be able to find MakefileWorker.mk and the needed include and library files.
 
 ```
 export CPPUTEST_HOME=/close-to-your-production-code/cpputest
